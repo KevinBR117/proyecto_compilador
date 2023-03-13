@@ -45,35 +45,35 @@ palabras_reservadas = ['int', 'string', 'real', 'logical', 'list', 'funcion', 'p
                     ]
                     
 estados_finales = {
-    '200': '{{',
-    '201': '{',
-    '202': '}}',
-    '203': '}',
-    '204': ':',
-    '205': '((',
-    '206': ')',
-    '207': '))',
-    '208': ')',
-    '209': ';',
-    '210': ',',
-    '211': '[',
-    '212': ']',
-    '213': '|||',
-    '214': '&&&',
-    '215': '~',
-    '216': '/+\ ',
-    '217': '/-\ ',
-    '218': '/*\ ',
+    '200': ['{{', 'símbolo'],
+    '201': ['{', 'símbolo'],
+    '202': ['}}', 'símbolo'],
+    '203': ['}', 'símbolo'],
+    '204': [':', 'símbolo'],
+    '205': ['((', 'símbolo'],
+    '206': [')', 'símbolo'],
+    '207': ['))', 'símbolo'],
+    '208': [')', 'símbolo'],
+    '209': [';', 'símbolo'],
+    '210': [',', 'símbolo'],
+    '211': ['[', 'símbolo'],
+    '212': [']', 'símbolo'],
+    '213': ['|||', 'símbolo'],
+    '214': ['&&&', 'símbolo'],
+    '215': ['~', 'simbolo'],
+    '216': ['/+\ ', 'símbolo'],
+    '217': ['/-\ ', 'símbolo'],
+    '218': ['/*\ ', 'símbolo'],
     '219': 'comentario',
-    '220': '/\ ',
+    '220': ['/\ ', 'símbolo'],
     '221': 'comentario',
-    '222': '<*<',
-    '223': '<*=',
-    '224': '>*>',
-    '225': '>*=',
-    '226': '==',
-    '227': '=*=',
-    '228': '=',
+    '222': ['<*<', 'símbolo'],
+    '223': ['<*=', 'símbolo'],
+    '224': ['>*>', 'símbolo'],
+    '225': ['>*=', 'símbolo'],
+    '226': ['==', 'símbolo'],
+    '227': ['=*=', 'símbolo'],
+    '228': ['=', 'símbolo'],
     '229': 'identificador',
     '230': 'número entero',
     '231': 'número decimal',
@@ -83,29 +83,16 @@ estados_finales = {
     '235': 'palabra reservada'
 }
 
-# apuntador
-estado = 0
-columna = 0
-apuntador = 0
-token = ''
-
-# def buscarEstadoFinal(estado, token_armado):
-#     global estado
-#     for estado_final in estados_finales:
-#         # print(estado_final[0])
-#         if(estado_final[0] == estado):
-#             print(
-#                 f'token: {token_armado} estado final: {estado_final[0]} reconoce: {estado_final[1]} ')
-#             # se reinicia el apuntador estado a 0 y se limpia la variable de token armado
-#             # print(f'aputadores estado{estado}, token_armado{token_armado}')
-#             estado = 0
-#             token_armado = ''
-#             print(f'aputadores estado{estado}, token_armado{token_armado}')
-#             return
-
-#     print(f'error el token: {token_armado} no es válido estado: {estado}')
-#     estado = 0
-#     token_armado = ''
+estados_error = {
+    '300': 'error en operador lógico',
+    '301': 'error en operador lógico',
+    '302': 'error en operador aritmético',
+    '303': 'error caracter inválido',
+    '304': 'error en operador relacional',
+    '305': 'error en identificador',
+    '306': 'error en números',
+    '307': 'error en textos'
+}
 
 def obtener_columna(caracter):
     try:
@@ -123,25 +110,98 @@ def obtener_columna(caracter):
             print('el caracter no existe en la lista')
 
 def main():
+    estado = 0
+    columna = 0
+    apuntador = 0
+    token = ''
+
     # leer linea de el archivo fuente
     for linea in archivo:
-        # global estado
-        # texto = linea.replace(' ', '')
         texto = linea
-        print(texto)
-        apuntador = 0
+        print('texto: ', texto)
+
         # iterar texto e identificar tokens   
-        for i in range(len(texto)):
-            print('caracter',texto[i])
-            apuntador += 1
-            caracter = texto[i]
+        while (apuntador < (len(texto))):
+            print('caracter =',texto[apuntador])
+            caracter = texto[apuntador]
             token += caracter
             columna = obtener_columna(caracter)
-            estado = buscarEstado(estado, columna)
-            if (estado >= 200):
+            estado = matriz_estado[estado][columna]
+            apuntador += 1
+
+            if (estado >= 200 and estado < 300):
+                tipo = estados_finales[str(estado)]
+                if(estado == 200):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 201):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                    apuntador -= 1
+                elif(estado == 202):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 203):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                    apuntador -= 1
+                elif(estado == 204):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 205):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 206):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                    apuntador -= 1
+                elif(estado == 207):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 208):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                    apuntador -= 1
+                elif(estado == 209):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 210):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 211):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 212):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 213):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 214):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 215):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 216):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 217):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 218):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 219):
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 220):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 221):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                elif(estado == 222):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 223):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 224):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 225):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                
+                
+                estado = 0
+                token = ''
+            
+            elif(estado >= 300):
                 pass
-            else:
-                pass
+
+                                                
 
 if __name__ == '__main__':
     main()
