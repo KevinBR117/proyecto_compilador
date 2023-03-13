@@ -103,7 +103,6 @@ def obtener_columna(caracter):
             return 20
         elif(caracter.isdigit() == True):
             return 21
-            # print('numero')
         elif(caracter.isspace() == True):
             return 22
         else:
@@ -118,11 +117,11 @@ def main():
     # leer linea de el archivo fuente
     for linea in archivo:
         texto = linea
-        print('texto: ', texto)
+        # print('texto: ', texto)
 
         # iterar texto e identificar tokens   
         while (apuntador < (len(texto))):
-            print('caracter =',texto[apuntador])
+            # print('caracter =',texto[apuntador])
             caracter = texto[apuntador]
             token += caracter
             columna = obtener_columna(caracter)
@@ -226,15 +225,31 @@ def main():
                     print(f'estado: {estado} token: {token} tipo: {tipo}')
                     apuntador -= 1
                                 
-
-
                 estado = 0
                 token = ''
             
             elif(estado >= 300):
-                pass
+                tipo = estados_error[str(estado)]
+                if(estado == 300):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 301):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 302):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 303):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 304):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 305):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 306):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 307):
+                    print(f'Error estado: {estado} token: {token} tipo: {tipo}')
+
+                estado = 0
+                token = ''
 
                                                 
-
 if __name__ == '__main__':
     main()
