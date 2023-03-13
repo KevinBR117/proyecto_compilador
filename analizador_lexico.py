@@ -193,8 +193,41 @@ def main():
                     print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
                 elif(estado == 225):
                     print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                
-                
+                elif(estado == 226):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 227):
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                elif(estado == 228):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                    apuntador -= 1
+                elif(estado == 229):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                elif(estado == 230):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                elif(estado == 231):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                elif(estado == 232):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                elif(estado == 233):
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 234):
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                elif(estado == 235):
+                    token = token[:-1]
+                    print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    apuntador -= 1
+                                
+
+
                 estado = 0
                 token = ''
             
