@@ -223,10 +223,6 @@ def main():
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
             elif(estado == 235):
                 token = token[:-1]
-                # print(f'palabra reservada "{token}"')
-                # print(len(token))
-                # token.strip()
-                # print(f'palabra reservada "{token}"')
                 if(token.strip() in palabras_reservadas):
                     print(f'estado: {estado} token: {token} tipo: {tipo}')
                 else:
