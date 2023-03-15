@@ -36,7 +36,7 @@ matriz_estado = [
     [235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 32, 235, 235, 235, 235, 235, 235, 235, 235]
 ]
 
-lista_simbolos = ['{','}',':','(',')',';',',','[',']','|','&','~','/','\ ','+','-','*','<','>','=','letra','dígito','espacio','@',"'",'"','.','E','null']
+lista_simbolos = ['{','}',':','(',')',';',',','[',']','|','&','~','/','\ ','+','-','*','<','>','=','letra','dígito','espacio','@',"'",'"','.','E','eof']
 
 palabras_reservadas = ['int', 'string', 'real', 'logical', 'list', 'funcion', 'principal', 'regresar', 'mientras', 'hacer', 'ciclo', 'repeat', 'si',
                         'para', 'dentro', 'imprimir', 'longitud', 'entero', 'decimal', 'entrada', 'asbsoluto', 'cadena', 'potencia', 'redondear', 'sumar',
@@ -115,13 +115,18 @@ def main():
 
     texto = Path("../proyecto_compilador/archivo_fuente.txt").read_text().replace('\n', ' ')
     print(f'archivo fuente: {texto}')
-
+    # print(len(texto))
     # iterar texto e identificar tokens   
     while (apuntador < (len(texto))):
+        # print(f'apuntador: {apuntador}')
         caracter = texto[apuntador]
         token += caracter
         columna = obtener_columna(caracter)
+        # si es eof
+        if(apuntador == len(texto)-1):
+            columna = obtener_columna('eof')
         estado = matriz_estado[estado][columna]
+        # print('estado: ', estado)
         apuntador += 1
 
         if (estado >= 200 and estado < 300):
@@ -249,134 +254,6 @@ def main():
             estado = 0
             token = ''
             
-    # fin de archivo fuente
-    columna = obtener_columna('null')
-    estado = matriz_estado[estado][columna]
-    # apuntador += 1
-    if (estado >= 200 and estado < 300):
-        tipo = estados_finales[str(estado)]
-        if(estado == 200):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 201):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            apuntador -= 1
-        elif(estado == 202):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 203):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            apuntador -= 1
-        elif(estado == 204):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 205):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 206):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            apuntador -= 1
-        elif(estado == 207):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 208):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            apuntador -= 1
-        elif(estado == 209):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 210):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 211):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 212):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 213):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 214):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 215):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 216):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 217):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 218):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 219):
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 220):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 221):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-            apuntador -= 1
-        elif(estado == 222):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 223):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 224):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 225):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 226):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 227):
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-        elif(estado == 228):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            apuntador -= 1
-        elif(estado == 229):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-            apuntador -= 1
-        elif(estado == 230):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-            apuntador -= 1
-        elif(estado == 231):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-            apuntador -= 1
-        elif(estado == 232):
-            token = token[:-1]
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-            apuntador -= 1
-        elif(estado == 233):
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 234):
-            print(f'estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 235):
-            token = token[:-1]
-            if(token in palabras_reservadas):
-                print(f'estado: {estado} token: {token} tipo: {tipo}')
-            else:
-                print(f'estado: 308 token: {token} no es palabra reservada')
-            apuntador -= 1
-                        
-        estado = 0
-        token = ''            
-    
-    elif(estado >= 300):
-        tipo = estados_error[str(estado)]
-        if(estado == 300):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 301):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 302):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 303):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 304):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 305):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 306):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-        elif(estado == 307):
-            print(f'Error estado: {estado} token: {token} tipo: {tipo}')
-
-        estado = 0
-        token = ''
                                                           
 if __name__ == '__main__':
     main()
