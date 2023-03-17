@@ -1,3 +1,19 @@
-{ {{
-@kevin = 55555 5.12 kevin "alan" int string &&& () [ rango ] maximo
-/*\ <*< = 45E5 
+{ {{ }} } : (( )) ; , [ ] ||| &&& ~ /+\ /-\ /*\ /\  //comentario 
+@kevin = 55555 5.12 kevin "alan" int string &&& () [ rango ] maximo 
+<*< = 45E5 >*> real logical 'profesor' list function principal regresar mientras 
+hacer <*= == >*= = hacer ciclo repeat si para dentro imprimir
+longitud
+entero
+decimal
+entrada
+asbsoluto
+cadena
+potencia
+redondear
+sumar
+minimo
+maximo
+elseif
+else
+rango
+45.3E10 
