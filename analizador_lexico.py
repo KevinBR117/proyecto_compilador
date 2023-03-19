@@ -112,9 +112,10 @@ def main():
     columna = 0
     token = ''
     apuntador = 0
+    eof= False
 
     texto = Path("../proyecto_compilador/archivo_fuente.txt").read_text().replace('\n', ' ')
-    print(f'archivo fuente: {texto}')
+    print(f'archivo fuente: {texto}\n')
     # print(len(texto))
     # iterar texto e identificar tokens   
     while (apuntador < (len(texto))):
@@ -124,7 +125,12 @@ def main():
         columna = obtener_columna(caracter)
         # si es eof
         if(apuntador == len(texto)-1):
+            # print('apuntador', apuntador)
+            # print('len(texto)', len(texto))
+            # print('caracter', caracter)
+            # print('token', token)
             columna = obtener_columna('eof')
+            eof = True
         estado = matriz_estado[estado][columna]
         # print('estado: ', estado)
         apuntador += 1
@@ -134,29 +140,37 @@ def main():
             if(estado == 200):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 201):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                apuntador -= 1
             elif(estado == 202):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 203):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                apuntador -= 1
             elif(estado == 204):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 205):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 206):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                apuntador -= 1
             elif(estado == 207):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 208):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                apuntador -= 1
             elif(estado == 209):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 210):
@@ -182,9 +196,11 @@ def main():
             elif(estado == 220):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 221):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
-                apuntador -= 1
             elif(estado == 222):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 223):
@@ -198,36 +214,48 @@ def main():
             elif(estado == 227):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
             elif(estado == 228):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-                apuntador -= 1
             elif(estado == 229):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
-                apuntador -= 1
             elif(estado == 230):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
-                apuntador -= 1
             elif(estado == 231):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
-                apuntador -= 1
             elif(estado == 232):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
-                apuntador -= 1
             elif(estado == 233):
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
             elif(estado == 234):
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
             elif(estado == 235):
-                token = token[:-1]
+                # apuntador -= 1
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
                 if(token.strip() in palabras_reservadas):
                     print(f'estado: {estado} token: {token} tipo: {tipo}')
                 else:
                     print(f'estado: 308 token: {token} no es palabra reservada')
-                apuntador -= 1
                             
             estado = 0
             token = ''            
