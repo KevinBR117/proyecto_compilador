@@ -1,4 +1,5 @@
 from pathlib import Path
+import pprint
 
 matriz_estado = [
     [1, 2, 204, 3, 4, 209, 210, 211, 212, 5, 7, 215, 9, 303, 303, 303, 303, 16, 18, 20, 32, 24, 0, 22, 30, 31, 303, 303, 0],
@@ -13,8 +14,8 @@ matriz_estado = [
     [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 14, 220, 10, 11, 12, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302],
     [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 216, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302],
     [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 217, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302],
-    [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 218, 302, 302, 13, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302],
-    [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 219, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302],
+    [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 218, 302, 302, 302, 302, 302, 302, 13, 13, 13, 302, 302, 302, 302, 302, 302],
+    [308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 33, 308, 308, 308, 13, 13, 13, 308, 308, 308, 308, 308, 308],
     [302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 15, 302, 302, 302, 302, 302, 302, 302, 302],
     [221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 221, 15, 15, 15, 221, 221, 221, 221, 221, 221],
     [304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 17, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304, 304],
@@ -33,7 +34,8 @@ matriz_estado = [
     [232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 232, 29, 232, 232, 232, 232, 232, 232, 232],
     [307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 30, 30, 30, 307, 233, 307, 307, 307, 307],
     [307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 307, 31, 31, 31, 307, 307, 234, 307, 307, 307],
-    [235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 32, 235, 235, 235, 235, 235, 235, 235, 235]
+    [235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 235, 32, 235, 235, 235, 235, 235, 235, 235, 235],
+    [308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 308, 219, 308, 308, 308, 33, 308, 308, 308, 13, 13, 13, 308, 308, 308, 308, 308, 219]
 ]
 
 lista_simbolos = ['{','}',':','(',')',';',',','[',']','|','&','~','/','\\','+','-','*','<','>','=','letra','dígito','espacio','@',"'",'"','.','E','eof']
@@ -90,7 +92,8 @@ estados_error = {
     '304': 'error en operador relacional',
     '305': 'error en identificador',
     '306': 'error en números',
-    '307': 'error en textos'
+    '307': 'error en textos',
+    '308': 'error en comentario'
 }
 
 def obtener_columna(caracter):
@@ -106,6 +109,26 @@ def obtener_columna(caracter):
             return 22
         else:
             print('el caracter no existe en la lista')
+
+tokens = {}
+identificadores = []
+constantes = []
+
+def guardar_token(token, tipo):
+    tokens.setdefault(token.strip(), tipo)
+
+def guardar_identificador(identificador):
+    if (identificador in identificadores):
+        pass
+    else:
+        identificadores.append(identificador.strip())
+
+def guardar_constante(constante):
+    if (constante in constantes):
+        pass
+    else:
+        constantes.append(constante.strip())
+
 
 def main():
     estado = 0
@@ -139,121 +162,150 @@ def main():
             tipo = estados_finales[str(estado)]
             if(estado == 200):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 201):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 202):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 203):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 204):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 205):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 206):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 207):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 208):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 209):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 210):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 211):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 212):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 213):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 214):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 215):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 216):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 217):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 218):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 219):
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
             elif(estado == 220):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 221):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
             elif(estado == 222):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 223):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 224):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 225):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 226):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 227):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 228):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 229):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_identificador(token)
             elif(estado == 230):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_constante(token)
             elif(estado == 231):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_constante(token)
             elif(estado == 232):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_constante(token)
             elif(estado == 233):
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_constante(token)
             elif(estado == 234):
                 print(f'estado: {estado} token: {token} tipo: {tipo}')
+                guardar_token(token, tipo)
+                guardar_constante(token)
             elif(estado == 235):
-                # apuntador -= 1
                 if(eof == False):
                     token = token[:-1]
                     apuntador -= 1
                 if(token.strip() in palabras_reservadas):
                     print(f'estado: {estado} token: {token} tipo: {tipo}')
+                    guardar_token(token, tipo)
                 else:
                     print(f'estado: 308 token: {token} no es palabra reservada')
                             
@@ -285,3 +337,7 @@ def main():
                                                           
 if __name__ == '__main__':
     main()
+    print('tokens: ')
+    pprint.pprint(tokens)
+    print(f'identificadores: {identificadores}')
+    print(f'constantes: {constantes}')

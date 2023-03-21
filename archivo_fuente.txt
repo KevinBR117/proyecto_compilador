@@ -17,3 +17,4 @@ elseif
 else
 rango
 45.3E10
+/*comentario*/
