@@ -1,5 +1,5 @@
 { {{ }} } : (( )) ; , [ ] ||| &&& ~ /+\ /-\ /*\ /\  //comentario 
-@kevin = 55555 5.12 kevin "alan" int string &&& () [ rango ] maximo 
+@kevin = 55555 5.12 kevin "kevin" int string &&& () [ rango ] maximo 
 <*< = 45E5 >*> real logical 'profesor' list function principal regresar mientras 
 hacer <*= == >*= = hacer ciclo repeat si para dentro imprimir
 longitud

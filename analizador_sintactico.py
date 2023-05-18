@@ -1,4 +1,4 @@
-import analizador_lexico,  pprint
+import analizador_lexico, pprint
 from analizador_lexico import tokens
 
 matriz_sintactica = [
