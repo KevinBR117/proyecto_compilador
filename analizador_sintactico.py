@@ -1,5 +1,5 @@
 import analizador_lexico, pprint
-from analizador_lexico import tokens
+from analizador_lexico import tokens, lista_tokens
 
 matriz_sintactica = [
     [1, 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 
@@ -46,6 +46,38 @@ matriz_sintactica = [
     ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 89, 90, 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 
     ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 91, 92, 93, 94, 96, 95, 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e']
 ]
+lista_simbolos = ['{{','}}',':','((','))',';', ',','{','}','(',')','[',']','|||','&&&','~','/+\\','/-\\','/*\\','/\\','<*<','>*>','<*=','>*=','=*=','==','=','identificador','numero','texto','int','string','real','logical','list','funcion','principal','regresar','mientras','hacer','ciclo','repeat','si','para',
+                'dentro','imprimir','longitud','entero','decimal','entrada','absoluto','cadena','potencia','redondear','sumar','minimo','maximo','elseif','else','rango','eof']
+
+simbolosNT = []
+
+lista_inicial = ['eof','PROGRAMA']
+
+def obtener_columna(token):
+    try:
+        columna = lista_simbolos.index(token)
+        return columna
+    except ValueError:
+        if(caracter.isalpha() == True):
+            return 27
+        elif(caracter.isdigit() == True):
+            return 28
+        elif(caracter.isalpha() == True):
+            return 29
+        else:
+            print('el caracter no existe en la lista')
+
+def obtener_produccion():
+
+    pass
+
+def main():
+    renglon = 0 
+    while(lista_tokens[0] == 'eof'):
+        token = lista_tokens[0]
+        columna = obtener_columna(token)
+        # buscar en la matriz sintactica el token y la produccion
+        produccion = matriz_sintactica[renglon][columna]
 
 if __name__ == "__main__":
     # generar tokens

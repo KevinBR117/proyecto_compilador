@@ -113,9 +113,11 @@ def obtener_columna(caracter):
 tokens = {}
 identificadores = []
 constantes = []
+lista_tokens = []
 
 def guardar_token(token, tipo):
     tokens.setdefault(token.strip(), tipo)
+    lista_tokens.append(token.strip())
 
 def guardar_identificador(identificador):
     if (identificador in identificadores):
@@ -341,3 +343,4 @@ if __name__ == '__main__':
     pprint.pprint(tokens)
     print(f'identificadores: {identificadores}')
     print(f'constantes: {constantes}')
+    print(f'lista de tokens: {lista_tokens}')
