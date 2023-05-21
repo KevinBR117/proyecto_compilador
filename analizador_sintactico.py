@@ -46,10 +46,18 @@ matriz_sintactica = [
     ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 89, 90, 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 
     ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 91, 92, 93, 94, 96, 95, 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e']
 ]
-lista_simbolos = ['{{','}}',':','((','))',';', ',','{','}','(',')','[',']','|||','&&&','~','/+\\','/-\\','/*\\','/\\','<*<','>*>','<*=','>*=','=*=','==','=','identificador','numero','texto','int','string','real','logical','list','funcion','principal','regresar','mientras','hacer','ciclo','repeat','si','para',
+
+lista_simbolos = ['{{','}}',':','((','))',';',',','{','}','(',')','[',']','|||','&&&','~','/+\\','/-\\','/*\\','/\\','<*<','>*>','<*=','>*=','=*=','==','=','identificador','numero','texto','int','string','real','logical','list','funcion','principal','regresar','mientras','hacer','ciclo','repeat','si','para',
                 'dentro','imprimir','longitud','entero','decimal','entrada','absoluto','cadena','potencia','redondear','sumar','minimo','maximo','elseif','else','rango','eof']
 
-simbolosNT = []
+lista_no_terminales = ['PROGRAMA','DECLARACIONVARIABLES','VARIABLES','LISTAVARIABLES','LISTAVARIABLESPRIMA','TIPO','FUNCIONES','FUNCION','MAIN','PARAMETROS','RETURN','LISTARETURN','LISTARETURNPRIMA','BLOQUE','ESTATUTOS','ESTATUTO','LISTA','LISTAELEMENTOS','LISTAPRIMA','ELEMENTO_TEXTOSPRIMA','ELEMENTO_NUMEROSPRIMA',
+'FUNCION_BUILT_IN','VARIABLESIMPRIMIR','VARIABLESPRIMA','ELSEIF','ELSE','RANGO','VALOR1','VALOR2','VALOR3','BOOLEXP','BOOLEXP_PRIMA','BOOLTERM','BOOLTERM_PRIMA','BOOLFACTOR','RELTERMP','RELTERM','EXPARITM','EXPPRIMA','TERMINO','TERMPRIMO','FACTOR','OPERADOR']
+
+producciones = {
+    1: 'DECLARACIONVARIABLES MAIN FUNCIONES',
+    2: '{{ VARIABLES }}',
+    3: 'TIPO : LISTAVARIABLES ; VARIABLES'
+}
 
 lista_inicial = ['eof','PROGRAMA']
 
@@ -67,17 +75,21 @@ def obtener_columna(token):
         else:
             print('el caracter no existe en la lista')
 
-def obtener_produccion():
+
+def obtener_produccion(numero_produccion):
 
     pass
+
 
 def main():
     renglon = 0 
     while(lista_tokens[0] == 'eof'):
         token = lista_tokens[0]
         columna = obtener_columna(token)
-        # buscar en la matriz sintactica el token y la produccion
-        produccion = matriz_sintactica[renglon][columna]
+        # buscar en la matriz sintactica la produccion a sustituir
+        numero_produccion = matriz_sintactica[renglon][columna]
+        produccion = obtener_produccion(numero_produccion)
+
 
 if __name__ == "__main__":
     # generar tokens
