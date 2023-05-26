@@ -6,6 +6,6 @@ real : @r1, @r2, @r3;
 principal { 
 mientras (@x<*<@y) {
  @z=20/+\1;
-}
+};
 }
 
