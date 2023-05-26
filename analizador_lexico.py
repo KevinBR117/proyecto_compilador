@@ -259,12 +259,12 @@ def main():
             elif(estado == 227):
                 print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
                 guardar_token(token, tipo[1])
-            # elif(estado == 228):
-            #     if(eof == False):
-            #         token = token[:-1]
-            #         apuntador -= 1
-            #     print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
-            #     guardar_token(token, tipo[1])
+            elif(estado == 228):
+                if(eof == False):
+                    token = token[:-1]
+                    apuntador -= 1
+                print(f'estado: {estado} token: {token} tipo: {tipo[1]}')
+                guardar_token(token, tipo[1])
             elif(estado == 229):
                 if(eof == False):
                     token = token[:-1]
