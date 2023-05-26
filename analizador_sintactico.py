@@ -196,27 +196,14 @@ def main():
         print(f'simbolo en revision: {simbolo}\n')
 
         if (token == simbolo):
-            # if(token == ';'):
-            #     print(token)
-            # if(simbolo == ';'):
-            #     print(simbolo)
             print('el token y el simbolo son iguales\n')
-
             print(f'lista_inicial: {lista_inicial}\n')
             print(f'lista_tokens: {lista_tokens}\n')    
-
             # eliminan de ambas listas el simbolo y el token
-            # if ((simbolo == ';') and (token == ';')):
-            #     print('eliminacion de token ;')
-            #     lista_inicial.remove(';')
-            #     lista_tokens.remove(';')
-            # else:
             # lista_inicial.remove(simbolo)
             # lista_tokens.remove(token)
-
             del lista_inicial[-1]
             del lista_tokens[0]
-
             print(f'lista_inicial despues de eliminar: {lista_inicial}\n')
             print(f'lista_tokens despues de eliminar: {lista_tokens}\n')
 

@@ -1,4 +1,3 @@
-
 import sys
 lista_inicial = ['eof','PROGRAMA' ,';']
 lista_tokens = [';']
