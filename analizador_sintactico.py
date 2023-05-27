@@ -185,7 +185,6 @@ def obtener_columna(token):
 
 
 def main():
-    renglon = 0 
     while(len(lista_tokens) != 0):
         print(f'lista_inicial: {lista_inicial}\n')
         print(f'lista_tokens: {lista_tokens}\n')
