@@ -200,8 +200,6 @@ def main():
             print(f'lista_inicial: {lista_inicial}\n')
             print(f'lista_tokens: {lista_tokens}\n')    
             # eliminan de ambas listas el simbolo y el token
-            # lista_inicial.remove(simbolo)
-            # lista_tokens.remove(token)
             del lista_inicial[-1]
             del lista_tokens[0]
             print(f'lista_inicial despues de eliminar: {lista_inicial}\n')
@@ -211,8 +209,6 @@ def main():
             print('el token y el simbolo son iguales\n')
             print(f'lista_inicial: {lista_inicial}\n')
             print(f'lista_tokens: {lista_tokens}\n') 
-            # lista_tokens.remove(token)
-            # lista_inicial.remove(simbolo)
             del lista_inicial[-1]
             del lista_tokens[0]
             print(f'lista_inicial despues de eliminar: {lista_inicial}\n')
@@ -222,8 +218,6 @@ def main():
             print('el token y el simbolo son iguales\n')
             print(f'lista_inicial: {lista_inicial}\n')
             print(f'lista_tokens: {lista_tokens}\n')
-            # lista_tokens.remove(token)
-            # lista_inicial.remove(simbolo)
             del lista_inicial[-1]
             del lista_tokens[0]
             print(f'lista_inicial despues de eliminar: {lista_inicial}\n')
@@ -234,8 +228,6 @@ def main():
                 print('el token y el simbolo son iguales\n')
                 print(f'lista_inicial: {lista_inicial}\n')
                 print(f'lista_tokens: {lista_tokens}\n')
-                # lista_tokens.remove(token)
-                # lista_inicial.remove(simbolo)
                 del lista_inicial[-1]
                 del lista_tokens[0]
                 print(f'lista_inicial despues de eliminar: {lista_inicial}\n')
@@ -255,17 +247,13 @@ def main():
                     if (str(matriz_sintactica[renglon][i]).isdigit() == True):
                         lista_esperaban.append(simbolos_gramatica[i])
                 print(lista_esperaban)
-                # print('tokens')
-                # pprint.pprint(tokens)
                 sys.exit('Se finaliza la ejecucion')
 
             # obtener produccion y sustituir por simbolo no terminal
             produccion = producciones.get(numero_produccion).split(' ')
             produccion.reverse()
-            # lista_inicial.remove(simbolo)
             del lista_inicial[-1]
             if(produccion[0] != 'nulo'):
-                # print(produccion)
                 lista_inicial.extend(produccion)
     print('analisis sintactico completado')
 
